@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'linux && java11'
-        }
-    }
+    agent any {
     stages {
         stage('Hello') {
             steps {
@@ -14,6 +10,21 @@ pipeline {
             steps {
                 echo 'cloning...'
             }
+        }
+    }
+
+    post {
+        always {
+            echo "I will always say Hello again!"
+        }
+        success {
+            echo "Yay, success"
+        }
+        failure {
+            echo "Oh no, failure"
+        }
+        cleanup {
+            echo "Don't care success of error"
         }
     }
 }
